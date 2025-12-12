@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files (optional - keep for demonstration)
+# test_*.py
+
+# Node
+node_modules/
+.npm
+*.tgz
+
+# Frontend build
+frontend/dist/
+frontend/build/
+
+# Misc
+.cache/
+coverage/
+.pytest_cache/
