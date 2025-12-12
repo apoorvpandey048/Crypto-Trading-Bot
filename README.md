@@ -8,13 +8,15 @@ All core features have been tested and verified on Binance Futures Testnet. See 
 ## 🚀 Features
 
 ### Trading Bot Core
-- ✅ Market, Limit, and Stop-Limit orders
+- ✅ **Basic Orders**: Market, Limit, and Stop-Limit orders
+- ✅ **Advanced Orders**: OCO, TWAP, and Grid Trading strategies
 - ✅ Binance Futures Testnet integration
 - ✅ Real-time price tracking
 - ✅ Order execution history
 - ✅ Multiple bot configurations
 - ✅ Comprehensive logging and error handling
 - ✅ CLI interface for direct trading
+- ✅ Background monitoring for automated strategies
 
 ### Backend (FastAPI)
 - ✅ JWT-based authentication
@@ -162,7 +164,7 @@ The application will be available at `http://localhost:5173`
    - Filter by symbol or status
    - Track execution status
 
-### CLI Interface
+### CLI Interface - Basic Orders
 
 ```bash
 cd backend/bot
@@ -189,6 +191,41 @@ python cli.py cancel --symbol BTCUSDT --order-id 12345
 python cli.py price --symbol BTCUSDT
 ```
 
+### CLI Interface - Advanced Orders
+
+For detailed documentation on advanced orders, see [backend/src/advanced/README.md](backend/src/advanced/README.md)
+
+#### OCO (One-Cancels-the-Other) Orders
+```bash
+cd backend
+
+# Place OCO order: Take profit + Stop loss
+python src/advanced/oco.py BTCUSDT SELL 0.002 95000 90000 89900
+```
+
+#### TWAP (Time-Weighted Average Price) Orders
+```bash
+cd backend
+
+# Split large order over time
+python src/advanced/twap.py BTCUSDT BUY 0.01 30 10
+```
+
+#### Grid Trading Strategy
+```bash
+cd backend
+
+# Create trading grid in price range
+python src/advanced/grid.py BTCUSDT 90000 95000 10 0.001
+```
+
+**Advanced Features**:
+- 🎯 **OCO**: Combines take-profit and stop-loss orders that automatically cancel each other
+- ⏱️ **TWAP**: Splits large orders into smaller chunks to minimize market impact
+- 📊 **Grid Trading**: Automated profit from price volatility in ranging markets
+- 🔄 **Background Monitoring**: Orders are monitored and managed automatically
+- 📝 **Comprehensive Logging**: All actions logged to `bot.log` for analysis
+
 ## 🏗️ Project Structure
 
 ```
@@ -196,8 +233,15 @@ Crypto-Trading-Bot/
 ├── backend/
 │   ├── bot/
 │   │   ├── basic_bot.py        # Trading bot implementation
+│   │   ├── advanced_orders.py  # Advanced strategies (OCO, TWAP, Grid)
 │   │   ├── cli.py              # Command-line interface
 │   │   └── __init__.py
+│   ├── src/
+│   │   └── advanced/           # Advanced order CLI scripts
+│   │       ├── oco.py          # OCO order execution
+│   │       ├── twap.py         # TWAP order execution
+│   │       ├── grid.py         # Grid trading execution
+│   │       └── README.md       # Advanced orders documentation
 │   ├── routes/
 │   │   ├── auth.py             # Authentication endpoints
 │   │   ├── users.py            # User management
@@ -212,6 +256,7 @@ Crypto-Trading-Bot/
 │   ├── schemas.py              # Pydantic schemas
 │   ├── auth.py                 # Authentication logic
 │   ├── requirements.txt        # Python dependencies
+│   ├── test_advanced_orders.py # Test suite for advanced strategies
 │   └── .env.example           # Environment variables template
 ├── frontend/
 │   ├── src/
